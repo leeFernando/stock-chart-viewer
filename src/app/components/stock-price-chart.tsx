@@ -72,6 +72,8 @@ export const StockPriceChart = () => {
   }, {} as Record<string, any>) || {}
   const chartData = sortBy(Object.entries(dataGroupedByDate).map(([dateLabel, object]) => ({ ...object, xAxis: dateLabel })), 'xAxis')
   const error = responses?.find(({ data }) => data?.error)?.data
+  const isLoading = Boolean(responses?.some(({ isLoading }) => isLoading))
+  const isEmpty = Boolean(responses?.every(({ data }) => !data?.results))
   
   return (
     <div className="flex flex-col gap-3">
@@ -98,7 +100,9 @@ export const StockPriceChart = () => {
         </div>
         </CardHeader>
         <CardContent>
-          {error ? (
+          {isLoading && isEmpty ? (
+            <div className="text-sm text-center my-[170px] text-slate-500">Loading charts...</div>
+          ) : error ? (
             <div className="text-sm text-center my-[170px] text-slate-500">{error?.error}</div>
           ) : !stocks.length ? (
             <div className="text-sm text-center my-[170px] text-slate-500">Please pick a stock</div>
