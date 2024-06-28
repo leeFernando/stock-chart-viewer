@@ -82,12 +82,12 @@ export const StockPriceChart = () => {
       </div>
       <Card>
         <CardHeader>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-2 max-md:flex-col">
           <CardTitle>Charts</CardTitle>
-          <div className="flex items-center justify-end gap-2">
+          <div className="flex items-center justify-end gap-2 max-sm:flex-col">
             <DateRangePicker value={dateRange} onChange={setDateRange} />
             <Select value={priceType} onValueChange={setPriceType}>
-              <SelectTrigger className="w-[130px]">
+              <SelectTrigger className="w-[130px] max-sm:w-full">
                 <SelectValue placeholder="Select Price" />
               </SelectTrigger>
               <SelectContent>
